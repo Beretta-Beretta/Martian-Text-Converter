@@ -1,4 +1,4 @@
-火星文字典: dict[str, list] = {
+火星文字典 = {
     '一': ['𠙵','𫐞', '𦫳'],
     '乙': ['𠀂', '𠃐', '𡆠', '𡆡', '𢒼', '𣎷', '𩁶', '𢩧', '𠃉', '𧈝'],
     '二': ['𠄟','𠓞','𠱌', '𠽬', '𡆤', '𢎐', '𢴧','𨳎'],
@@ -5743,7 +5743,8 @@
     '槱': ['𤍕'],
     '虗': ['𧇲']}
 
-组合字: dict[list] = {
+
+组合字 = {
     '黑屋': ['𪑱'],
     '风林': ['𬱾'],
     '首页': ['𬱯'],
@@ -6123,7 +6124,8 @@
     '相同': ['𫝛'],
     '马鹿': ['𫠋']}
 
-符号: list = ['じòぴé', 'じ☆ve', '℡', '№', '™', 'დ', 'ღ', '♡', '❣', 'ლ', '❤', 'ૡ', '❦', 'ބ', '♥', '۵', '♩', '♪', '♫', '♬',
+
+符号 = ['じòぴé', 'じ☆ve', '℡', '№', '™', 'დ', 'ღ', '♡', '❣', 'ლ', '❤', 'ૡ', '❦', 'ބ', '♥', '۵', '♩', '♪', '♫', '♬',
               '¶',
               '♂', '♀', '∮', '§', 'Ψ', '★', '✰', '☆', '༊', '₪', 'ཌ', 'ༀ', '✮', '✡', '♣', '✿', '❁', '❃', '❋', '❀', '✽',
               'ஐ', 'ૢ', '⚘', '๛', '௸', '࿆', '༒', '༺', 'এ', '﹌', 'ৡ', '༻', '✓', '✗', '൬', 'ོ', 'ઈ', '҉', '҈', 'ઉ', 'ଓ',
@@ -6134,49 +6136,3 @@
               'Ψ',
               '♂', '♀', '⚦', '⚨', '⚩', '⚤', '⚢', '⚣', '⚥', '⚧', '⚭', '⚮', '⚯', '⚬', '☿', '𦮙']
 
-
-def 火星文转换(text: str, symbol: bool = True) -> str:
-    '''
-    :param text: 需要转换的文本。
-    :param symbol: 是否加符号。
-    :return: 转换后的文本。
-    '''
-    def _火星文转换(s: str, symbol: bool) -> str:
-        '''
-        :param s: 需要转换的单行文本。
-        :param symbol: 是否加符号。
-        :return: 转换后的文本。
-        '''
-        import random
-        trans = []
-        for _ in 组合字.keys():
-            if _ in s:
-                s = s.replace(_, random.choice(组合字[_]))
-        for c in s:
-            if c in 火星文字典.keys() and 火星文字典[c]:
-                trans.append(random.choice(火星文字典[c]))
-            elif c == ' ' and symbol:
-                trans.append(random.choice(符号))
-            else:
-                trans.append(c)
-        fh = random.sample(符号, 3)
-        return fh[0] + ''.join(trans) + fh[1:] if symbol else ''.join(trans)
-
-    text = text.split('\n')
-    return '\n'.join(_火星文转换(s, symbol) for s in text)
-
-
-def 获取汉字对应火星文(c: str) -> str:
-    assert len(c) == 1, '请输入单个字符。'
-    try:
-        return ' '.join(火星文字典[c])
-    except KeyError:
-        return ''
-
-
-__all__ = ['火星文转换', '获取汉字对应火星文']
-
-if __name__ == '__main__':
-    while (s := input()):
-        for i in range(5):
-            print(火星文转换(s))

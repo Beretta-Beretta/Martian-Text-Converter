@@ -1,4 +1,4 @@
-异体字字典: dict[str, str] = {
+异体字字典 = {
     "𨹶": "隮𨽘𨼻𨻕𨹷",
     "𦷱": "葥",
     "𣡦": "囊嚢𢑿𡄜𣞈𣡪𣡏𧛦",
@@ -26915,21 +26915,3 @@
     "駘": "骀",
     "𩂳": "霊䨩靈𩆜𩇎𤫊𩄇𤴤霛𩃞𩅶𩃏𧈀𡀓𢩙𢩝灵㚑"
 }
-
-
-def 异体字转换(s: str) -> list[str]:
-    from random import choice
-    res = []
-    for _ in range(5):
-        temp = []
-        for c in s:
-           temp.append(choice(异体字字典.get(c, c)))
-        res.append(''.join(temp))
-    return res
-
-
-__all__ = ['异体字转换']
-if __name__ == '__main__':
-    s = input()
-    res = 异体字转换(s)
-    print('\n'.join(res))
